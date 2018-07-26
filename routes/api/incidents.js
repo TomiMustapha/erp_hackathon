@@ -16,8 +16,7 @@ router.get('/', (req, res) => {
 router.get('/:incident_id', (req, res) => {
     Incident.findById(req.params.incident_id)
         .then(incident => res.json(incident))
-        .catch(error => res.status(404).json({ noincident: 'No such incident found' }))
-    );
+        .catch(error => res.status(404).json({ noincident: 'No such incident found' }));
 });
 
 // POST /incident

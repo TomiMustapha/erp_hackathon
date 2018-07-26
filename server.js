@@ -1,4 +1,5 @@
 const users = require('./routes/api/users');
+const incidents = require('./routes/api/incidents');
 const bodyParser = require('body-parser');
 const express = require('express');
 const mongoose = require('mongoose');
@@ -16,6 +17,7 @@ var options = {
 };
 
 // db connection
+console.log(process.env.mongoURI);
 mongoose.connect(
     process.env.mongoURI,
     options,
