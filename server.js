@@ -87,7 +87,10 @@ app.post('/incident', incident.single('file'), (req, res) => {
     res.json({ file: req.file });
 });
 
-// GET /files
+// GET /files/:filename
+app.get('/files/:filename', (req, res) => {
+    gfs.
+})
 
 // routes
 app.use('/users', users);
