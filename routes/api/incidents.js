@@ -23,7 +23,7 @@ router.get('/:incident_id', (req, res) => {
         );
 });
 
-// POST /incident
+// POST /incidents
 router.post('/', (req, res) => {
     const upcomingIncident = new Incident({
         user: req.body.user,
