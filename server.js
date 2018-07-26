@@ -89,8 +89,14 @@ app.post('/incident', incident.single('file'), (req, res) => {
 
 // GET /files/:filename
 app.get('/files/:filename', (req, res) => {
-    gfs.
-})
+    gfs.files.findOne({ filename: req.params.filename }, (error, file) => {
+        if (!file || file.length === 0) {
+            return res.status(404).json({ filenotfound: 'No file found' });
+        }
+
+        return res.json(file);
+    });
+});
 
 // routes
 app.use('/users', users);
