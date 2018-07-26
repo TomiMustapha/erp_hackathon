@@ -1,2 +1,15 @@
 # Dependency directories
 node_modules/
+bundle.js
+
+# misc
+.DS_Store
+.env
+*.orig
+.idea/
+.vscode/
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.eslintrc.json
