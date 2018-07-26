@@ -37,7 +37,7 @@ app.all('/*', function(req, res, next) {
             ' ' +
             req.path +
             ' ' +
-            JSON.stringify(req.query)
+            JSON.stringify(req.body)
     );
     next();
 });
