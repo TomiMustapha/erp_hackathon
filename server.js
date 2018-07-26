@@ -1,8 +1,16 @@
-const users = require('./routes/api/users');
-const incidents = require('./routes/api/incidents');
 const bodyParser = require('body-parser');
 const express = require('express');
+const methodOverride = require('method-override');
 const mongoose = require('mongoose');
+const crypto = require('crypto');
+const multer = require('multer');
+const MulterGridFsStorage = require('multer-gridfs-storage');
+const GridFsStream = require('gridfs-stream');
+
+// routes/api
+const incidents = require('./routes/api/incidents');
+const users = require('./routes/api/users');
+
 const app = express();
 
 const port = process.env.PORT || 8080;
@@ -10,6 +18,7 @@ const port = process.env.PORT || 8080;
 // middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(methodOverride('_method'));
 
 // db options
 var options = {
@@ -17,18 +26,44 @@ var options = {
 };
 
 // db connection
-console.log(process.env.mongoURI);
-mongoose.connect(
-    process.env.mongoURI,
-    options,
-    function(error) {
-        if (error) {
-            console.log(error);
-        } else {
-            console.log('db connection successful.');
-        }
+mongoose
+    .connect(
+        process.env.mongoURI,
+        options
+    )
+    .then(() => console.log('db connection successful.'))
+    .catch(error => console.log(error));
+
+// Get db connection
+const connection = mongoose.connection;
+var gfs;
+
+connection.once('open', function() {
+    gfs = GridFsStream(connection.db, mongoose.mongo);
+    gfs.collection('incidents');
+});
+
+const storage = new MulterGridFsStorage({
+    url: process.env.mongoURI,
+    file: (req, file) => {
+        return new Promise((resolve, reject) => {
+            crypto.randomBytes(16, (err, buf) => {
+                if (err) {
+                    return reject(err);
+                }
+                const filename =
+                    buf.toString('hex') + path.extname(file.originalname);
+                const fileInfo = {
+                    filename: filename,
+                    bucketName: 'incidents'
+                };
+                resolve(fileInfo);
+            });
+        });
     }
-);
+});
+
+const incident = multer({ storage });
 
 app.all('/*', function(req, res, next) {
     console.log(
@@ -37,7 +72,7 @@ app.all('/*', function(req, res, next) {
             ' ' +
             req.path +
             ' ' +
-            JSON.stringify(req.query)
+            JSON.stringify(req.body)
     );
     next();
 });
@@ -45,6 +80,22 @@ app.all('/*', function(req, res, next) {
 // default route
 app.get('/', function(req, res) {
     res.send('Hello World');
+});
+
+// POST /incident
+app.post('/incident', incident.single('file'), (req, res) => {
+    res.json({ file: req.file });
+});
+
+// GET /files/:filename
+app.get('/files/:filename', (req, res) => {
+    gfs.files.findOne({ filename: req.params.filename }, (error, file) => {
+        if (!file || file.length === 0) {
+            return res.status(404).json({ filenotfound: 'No file found' });
+        }
+
+        return res.json(file);
+    });
 });
 
 // routes
