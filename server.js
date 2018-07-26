@@ -8,6 +8,12 @@ const app = express();
 const port = process.env.PORT || 8080;
 
 // middleware
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -37,7 +43,7 @@ app.all('/*', function(req, res, next) {
             ' ' +
             req.path +
             ' ' +
-            JSON.stringify(req.query)
+            JSON.stringify(req.body)
     );
     next();
 });
