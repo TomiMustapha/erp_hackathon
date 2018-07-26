@@ -1,8 +1,8 @@
-const users = require('./routes/api/users');
-const incidents = require('./routes/api/incidents');
 const bodyParser = require('body-parser');
 const express = require('express');
 const mongoose = require('mongoose');
+const incidents = require('./routes/api/incidents');
+const users = require('./routes/api/users');
 const app = express();
 
 const port = process.env.PORT || 8080;
