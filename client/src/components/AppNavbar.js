@@ -41,6 +41,9 @@ class AppNavbar extends Component {
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="mx-auto" navbar>
                             <NavItem className="mx-5">
+                                <NavLink href="/">Dashboard</NavLink>
+                            </NavItem>
+                            <NavItem className="mx-5">
                                 <NavLink href="/ReportPage">Report</NavLink>
                             </NavItem>
                             <NavItem className="mx-5">

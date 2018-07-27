@@ -8,6 +8,8 @@ import CreateIncident from './components/CreateIncident';
 import Register from './components/Register';
 import Login from './components/Login';
 import IncidentPage from './components/IncidentPage';
+import ContactUs from './components/ContactUs'
+import About from './components/About'
 
 class App extends Component {
     render() {
@@ -23,8 +25,11 @@ class App extends Component {
                         path="/ReportPage"
                         component={CreateIncident}
                     />
+
                     <Route exact path="/login" component={Login} />
                     <Route path="/IncidentPage/:id" component={IncidentPage} />
+                    <Route path="/Contact" component={ContactUs} />
+                    <Route path="/About" component={About} />
                 </div>
             </Router>
         );
