@@ -100,9 +100,10 @@ if (process.env.NODE_ENV === 'production') {
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
     });
 }
+
 // default route
 app.get('/', function(req, res) {
-    res.send('Hello World');
+    res.json('Hello World!');
 });
 
 // POST /incident

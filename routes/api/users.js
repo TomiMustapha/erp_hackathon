@@ -15,7 +15,7 @@ router.post('/login', function(req, res) {
             if (user) {
                 res.status(200).redirect('/');
             } else {
-                    res.status(404).json({
+                res.status(404).json({
                     success: false
                 });
             }
@@ -55,7 +55,7 @@ router.post('/', function(req, res) {
                 success: false
             });
         } else {
-            res.status(200).redirect('/');
+            res.redirect('/');
         }
     });
 });
