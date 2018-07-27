@@ -36,7 +36,7 @@ class AppNavbar extends Component {
                         href="/"
                     >
                         <img width="40%" src={logo} />
-                        C.A.I.R
+                        C.A.I.R.S
                     </NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
