@@ -21,7 +21,7 @@ class Login extends Component {
                 console.log(res);
             })
             .catch(err => {
-                alert('Try Again!');
+                console.log(err);
             });
     }
 
