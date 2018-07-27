@@ -158,6 +158,5 @@ app.get('/', function(req, res) {
     res.json('Hello World!');
 });
 
-app.listen(process.env.PORT || 8080, () =>
-    console.log(`Server running on port ${port}`)
-);
+const port = process.env.PORT;
+app.listen(port, () => console.log(`Server running on port ${port}`));
