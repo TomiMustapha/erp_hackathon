@@ -32,7 +32,7 @@ class IncidentList extends Component {
         return (
             <div>
                 <Container>
-                <Alert color="danger">In the event of an emergency contact local Police first</Alert>
+                <Alert color="danger">In the event of an emergency contact local police first</Alert>
                 </Container>
                 <center>
                     <h1>Recent Incidents</h1>
