@@ -135,6 +135,7 @@ app.get('/incident/:filename', (req, res) => {
         }
 
         const rs = gfs.createReadStream(file.filename);
+        // res.set('Content-Type', 'image/png');
         rs.pipe(res);
     });
 });

@@ -19,19 +19,8 @@ class Incident extends Component {
         super(props);
     }
 
-    getImage(file) {
-        axios
-            .get('/incident/' + file)
-            .then(res => {
-                var b64 = btoa(res);
-                var dataUrl = 'data:image/jpeg;charset=utf-8;base64,' + b64;
-                console.log(dataUrl);
-                return dataUrl;
-            })
-            .catch(err => console.log(err));
-    }
-
     render() {
+        let url = '/incident/' + this.props.file;
         return (
             <div width="500px">
                 <Card width="50%" className="mx-auto" fluid>
@@ -41,14 +30,10 @@ class Incident extends Component {
                             <Badge color="primary">{this.props.category}</Badge>
                         </CardSubtitle>
                         <CardText>{this.props.description}</CardText>
-                        <img
-                            width="50%"
-                            src={this.getImage(this.props.file)}
-                            alt="Card image cap"
-                        />
+                        <Img width="50%" src={url} alt="Card image cap" />
                         <br />
                         <br />
-                        
+
                         <Button href={`/IncidentPage/${this.props.id}`} color="secondary">View More</Button>
                     </CardBody>
                 </Card>
