@@ -26,7 +26,6 @@ router.get('/:incident_id', (req, res) => {
 // POST /incidents
 router.post('/', (req, res) => {
     const upcomingIncident = new Incident({
-        user: req.body.user,
         title: req.body.title,
         category: req.body.category,
         description: req.body.description,

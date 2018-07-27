@@ -7,21 +7,44 @@ const axios = require('axios');
 class CreateIncident extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = { category: 'Fire' };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleSubmit(event) {
         event.preventDefault();
         console.log(this.state);
-        /*axios
-            .post('/incidents', )
+        const formData = new FormData();
+        formData.append('file', this.state.file);
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        };
+        axios
+            .post('/incident', formData, config)
             .then(res => {
-                console.log('Incident successfully created!');
+                if (
+                    res &&
+                    res.data &&
+                    res.data.file &&
+                    res.data.file.filename
+                ) {
+                    this.setState({ file: res.data.file.filename });
+                    axios
+                        .post('/incidents', this.state)
+                        .then(res => {
+                            console.log('Incident reported!');
+                        })
+                        .catch(err => {
+                            console.log(err);
+                        });
+                }
+                console.log(res);
             })
             .catch(err => {
                 alert('Try Again!');
-            });*/
+            });
     }
 
     updateState(evt, field) {
@@ -30,6 +53,7 @@ class CreateIncident extends Component {
                 this.setState({ title: evt.target.value });
                 break;
             case 'category':
+                console.log('This is target' + evt.target);
                 this.setState({ category: evt.target.value });
                 break;
             case 'description':
@@ -42,7 +66,7 @@ class CreateIncident extends Component {
                 this.setState({ location: evt.target.value });
                 break;
             case 'file':
-                this.setState({ file: evt.target.value });
+                this.setState({ file: evt.target.files[0] });
                 break;
             default:
         }
@@ -61,18 +85,25 @@ class CreateIncident extends Component {
                         <FormGroup>
                             <Label for="title">Title</Label>
                             <Input
+                                required
                                 type="text"
                                 name="title"
                                 id="Title"
                                 placeholder="Incident Title"
-                                onChange={evt =>
-                                    this.updateState(evt, 'title')
-                                }
+                                onChange={evt => this.updateState(evt, 'title')}
                             />
                         </FormGroup>
                         <FormGroup>
                             <Label for="category">Category</Label>
-                            <Input type="select" name="select" id="Category">
+                            <Input
+                                required
+                                type="select"
+                                name="select"
+                                id="Category"
+                                onChange={evt =>
+                                    this.updateState(evt, 'category')
+                                }
+                            >
                                 <option>Fire</option>
                                 <option>Broken Fence</option>
                                 <option>Vehicle in Park</option>
@@ -80,9 +111,6 @@ class CreateIncident extends Component {
                                 <option>Rhino out of Park</option>
                                 <option>Unidentified Person in Park</option>
                                 <option>Other</option>
-                                onChange={evt =>
-                                    this.updateState(evt, 'category')
-                                }
                             </Input>
                         </FormGroup>
                         <FormGroup>
@@ -90,6 +118,7 @@ class CreateIncident extends Component {
                                 Describe the incident
                             </Label>
                             <Input
+                                required
                                 type="textarea"
                                 name="description"
                                 id="Description"
@@ -106,18 +135,28 @@ class CreateIncident extends Component {
                                 name="date"
                                 id="Date"
                                 placeholder="date placeholder"
-                                onChange={evt =>
-                                    this.updateState(evt, 'date')
-                                }
+                                onChange={evt => this.updateState(evt, 'date')}
                             />
                         </FormGroup>
                         <FormGroup>
                             <Label for="location">Location</Label>
-                            <Input type="text" name="location" id="Location" onChange={evt =>this.updateState(evt, 'location')}/>
+                            <Input
+                                type="text"
+                                name="location"
+                                id="Location"
+                                onChange={evt =>
+                                    this.updateState(evt, 'location')
+                                }
+                            />
                         </FormGroup>
                         <FormGroup>
                             <Label for="File">Incident Image / Video</Label>
-                            <Input type="file" name="file" id="File" onChange={evt =>this.updateState(evt, 'file')}/>
+                            <Input
+                                type="file"
+                                name="file"
+                                id="File"
+                                onChange={evt => this.updateState(evt, 'file')}
+                            />
                         </FormGroup>
                         <Button onClick={this.handleSubmit}>Submit</Button>
                     </Form>

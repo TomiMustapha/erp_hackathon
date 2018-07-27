@@ -12,7 +12,7 @@ class App extends Component {
         return (
             <div className="App">
                 <AppNavbar />
-                <Login />
+                <CreateIncident />
                 {/* <IncidentButton/>
         <IncidentList/> */}
             </div>

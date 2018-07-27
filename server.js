@@ -59,6 +59,7 @@ connection.once('open', function() {
 const storage = new MulterGridFsStorage({
     url: process.env.mongoURI,
     file: (req, file) => {
+        console.log(file);
         if (file.contentType !== 'video/mp4') {
             return null;
         }
