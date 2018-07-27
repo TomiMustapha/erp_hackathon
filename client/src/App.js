@@ -10,6 +10,7 @@ class App extends Component {
       <div className="App">
         <AppNavbar/>
         <IncidentButton/>
+        <IncidentList/>
       </div>
     );
   }

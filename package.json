@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "server": "nodemon server.js"
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\" "
   },
   "repository": {
     "type": "git",
@@ -24,6 +26,8 @@
   },
   "dependencies": {
     "body-parser": "^1.18.3",
+    "concurrently": "^3.6.1",
+    "create-react-app": "^1.5.2",
     "express": "^4.16.3",
     "gridfs-stream": "^1.1.1",
     "method-override": "^3.0.0",
