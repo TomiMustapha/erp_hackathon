@@ -14,12 +14,15 @@ class Register extends Component {
     handleSubmit(event) {
         event.preventDefault();
         console.log(this.state);
-        axios({
-            url: url + '/users',
-            method: 'post',
-            data: {
-                user: this.state
+        axios.post(url + '/users', {user:this.state})
+        .then(res => {
+            console.log(res);
+            if(res.data.success) {
+                alert("Registration successful!");
+                window.location = url;
             }
+        }).catch(err => {
+            alert("Try Again!");
         });
     }
 

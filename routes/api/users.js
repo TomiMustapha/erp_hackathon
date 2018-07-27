@@ -32,9 +32,13 @@ router.post('/', function(req, res) {
     schemaUser.save(function(err) {
         if (err) {
             console.log(err);
-            res.status(404).send('ERROR');
+            res.status(404).json({
+                success: false
+            });
         } else {
-            res.status(200).send(oUser);
+            res.status(200).json({
+                success: true
+            });
         }
     });
 });
