@@ -12,9 +12,9 @@ class App extends Component {
         return (
             <div className="App">
                 <AppNavbar />
-                <CreateIncident />
-                {/* <IncidentButton/>
-        <IncidentList/> */}
+                {/* <CreateIncident /> */}
+                <IncidentButton/>
+                <IncidentList/>
             </div>
         );
     }

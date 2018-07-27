@@ -1,8 +1,7 @@
 import React, {Component} from 'react'
-import { ListGroup, ListGroupItem, Button,Container,Col } from 'reactstrap';
+import { ListGroup, ListGroupItem,Container} from 'reactstrap';
 import Incident from './Incident';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
-import '../Register.css';
 
 const axios = require('axios');
 const url = 'http://localhost:8080';
@@ -25,11 +24,9 @@ class IncidentList extends Component {
         .then(res => {
             console.log(res);
             if(res.data) {
-               // alert("Registration successful!");
                this.setState(this.state.items = res.data);
             }
         }).catch(err => {
-            alert("Try Again!");
         });
 
     }
