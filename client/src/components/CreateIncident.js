@@ -34,7 +34,8 @@ class CreateIncident extends Component {
                     axios
                         .post('/incidents', this.state)
                         .then(res => {
-                            console.log('Incident reported!');
+                            console.log('Incident Reported!');
+                            window.location = '/';
                         })
                         .catch(err => {
                             console.log(err);

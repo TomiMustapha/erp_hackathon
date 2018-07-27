@@ -7,7 +7,7 @@ const Incident = require('../../models/Incident');
 // GET /incidents
 router.get('/', (req, res) => {
     Incident.find()
-        .sort({ date: -1 })
+        .sort({ createdAt: -1 })
         .then(incidents => res.json(incidents))
         .catch(error =>
             res.status(404).json({ noincidents: 'No incidents found' })
@@ -36,7 +36,7 @@ router.post('/', (req, res) => {
 
     upcomingIncident
         .save()
-        .then(incident => res.json(incident))
+        .then(incident => res.redirect('/'))
         .catch(error => res.status(400).json(error));
 });
 

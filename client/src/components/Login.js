@@ -3,7 +3,6 @@ import { Button, Form, FormGroup, Label, Input, Container } from 'reactstrap';
 import '../style.css';
 
 const axios = require('axios');
-const url = 'http://localhost:8080';
 
 class Login extends Component {
     constructor(props) {
@@ -16,8 +15,9 @@ class Login extends Component {
         event.preventDefault();
         console.log(this.state);
         axios
-            .post(url + '/users/login', { cred: this.state })
+            .post('/users/login', { cred: this.state })
             .then(res => {
+                window.location = '/';
                 console.log(res);
             })
             .catch(err => {

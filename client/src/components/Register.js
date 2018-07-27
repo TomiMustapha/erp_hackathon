@@ -3,7 +3,6 @@ import { Button, Container, Form, FormGroup, Label, Input } from 'reactstrap';
 import '../style.css';
 
 const axios = require('axios');
-const url = 'http://localhost:8080';
 
 class Register extends Component {
     constructor(props) {
@@ -16,14 +15,15 @@ class Register extends Component {
         event.preventDefault();
         console.log(this.state);
         axios
-            .post(url + '/users', { user: this.state })
+            .post('/users', { user: this.state })
             .then(res => {
+                window.location = '/';
                 console.log(res);
                 if (res.data.success) {
                 }
             })
             .catch(err => {
-                alert('Try Again!');
+                console.log('Try again');
             });
     }
 
