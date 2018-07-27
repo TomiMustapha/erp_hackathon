@@ -31,23 +31,22 @@ class AppNavbar extends Component {
             <div>
                 <Navbar color="dark" dark expand="lg">
                     <NavbarBrand
-                        style={{ width: 95 }}
+                        style={{ width: 100 }}
                         className="mr-0"
                         href="/"
                     >
-                        <img width="40%" src={logo} />
-                        C.A.I.R.S
+                        <img width="80%" src={logo} />
                     </NavbarBrand>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="mx-auto" navbar>
-                            <NavItem className="mr-5">
+                            <NavItem className="mx-5">
                                 <NavLink href="/ReportPage">Report</NavLink>
                             </NavItem>
-                            <NavItem className="mr-5">
+                            <NavItem className="mx-5">
                                 <NavLink href="/About">About</NavLink>
                             </NavItem>
-                            <NavItem className="mr-5">
+                            <NavItem className="mx-5">
                                 <NavLink href="/Contact">Contact Us </NavLink>
                             </NavItem>
                         </Nav>
