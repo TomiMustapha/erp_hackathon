@@ -18,9 +18,15 @@ const port = process.env.PORT || 8080;
 
 // middleware
 app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header('Access-Control-Allow-Origin', '*');
+    res.setHeader(
+        'Access-Control-Allow-Methods',
+        'GET, POST, OPTIONS, PUT, PATCH, DELETE'
+    );
+    res.header(
+        'Access-Control-Allow-Headers',
+        'Origin, X-Requested-With, Content-Type, Accept'
+    );
     next();
 });
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -100,6 +106,9 @@ app.post('/incident', incident.single('file'), (req, res) => {
 // GET /files
 app.get('/files', (req, res) => {
     gfs.files.find().toArray((err, files) => {
+        if (err) {
+            return res.status(400).json({ err: err });
+        }
         if (!files || files.length === 0) {
             return res.status(404).json({ nofilesfound: 'No files found' });
         }
@@ -110,7 +119,10 @@ app.get('/files', (req, res) => {
 
 // GET /incident/:filename
 app.get('/incident/:filename', (req, res) => {
-    gfs.files.findOne({ filename: req.params.filename }, (error, file) => {
+    gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
+        if (err) {
+            return res.status(400).json({ err: err });
+        }
         if (!file || file.length === 0) {
             return res.status(404).json({ filenotfound: 'No file found' });
         }
@@ -123,8 +135,10 @@ app.get('/incident/:filename', (req, res) => {
 // DELETE /incident/:file_id
 app.delete('/incident/:file_id', (req, res) => {
     gfs.remove(
-        (_id: req.params.file_id),
-        (root: 'incidents'),
+        {
+            _id: req.params.file_id,
+            root: 'incidents'
+        },
         (error, gridstore) => {
             return res.status(400).json({ error: error });
         }
