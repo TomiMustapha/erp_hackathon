@@ -18,8 +18,6 @@ class Register extends Component {
         .then(res => {
             console.log(res);
             if(res.data.success) {
-                alert("Registration successful!");
-                window.location = url;
             }
         }).catch(err => {
             alert("Try Again!");

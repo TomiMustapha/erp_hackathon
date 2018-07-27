@@ -2,7 +2,26 @@ const express = require('express');
 const User = require('../../models/User');
 const router = express.Router();
 
-router.post('/login', function(res, req) {});
+router.post('/login', function(req, res) {
+    console.log(req.body.cred);
+    var oCredentials = req.body.cred;
+    User.findOne(oCredentials, function(err, user) {
+        if (err) {
+            console.log(err);
+            res.status(404).json({
+                success: false
+            });
+        } else {
+            if (user) {
+                res.status(200).redirect('/');
+            } else {
+                    res.status(404).json({
+                    success: false
+                });
+            }
+        }
+    });
+});
 
 router.get('/', function(req, res) {
     User.find({}, function(err, users) {
@@ -36,9 +55,7 @@ router.post('/', function(req, res) {
                 success: false
             });
         } else {
-            res.status(200).json({
-                success: true
-            });
+            res.status(200).redirect('/');
         }
     });
 });
