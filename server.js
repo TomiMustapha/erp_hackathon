@@ -13,7 +13,6 @@ const incidents = require('./routes/api/incidents');
 const users = require('./routes/api/users');
 
 const app = express();
-const port = process.env.PORT || 8080;
 
 // middleware
 app.use(function(req, res, next) {
@@ -159,4 +158,6 @@ app.get('/', function(req, res) {
     res.json('Hello World!');
 });
 
-app.listen(port, () => console.log(`Server running on port ${port}`));
+app.listen(process.env.PORT || 8080, () =>
+    console.log(`Server running on port ${port}`)
+);
