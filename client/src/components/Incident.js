@@ -17,7 +17,19 @@ class Incident extends Component {
     constructor(props) {
         super(props);
     }
-    getImage(file) {}
+
+    getImage(file) {
+        axios
+            .get('/incident/' + file)
+            .then(res => {
+                var b64 = btoa(res);
+                var dataUrl = 'data:image/jpeg;charset=utf-8;base64,' + b64;
+                console.log(dataUrl);
+                return dataUrl;
+            })
+            .catch(err => console.log(err));
+    }
+
     render() {
         return (
             <div width="500px">

@@ -13,8 +13,8 @@ class App extends Component {
             <div className="App">
                 <AppNavbar />
                 {/* <CreateIncident /> */}
-                <IncidentButton/>
-                <IncidentList/>
+                <IncidentButton />
+                <IncidentList />
             </div>
         );
     }
