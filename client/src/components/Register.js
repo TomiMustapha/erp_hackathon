@@ -1,4 +1,13 @@
 import React, { Component } from 'react';
+import {
+    Button,
+    Container,
+    Form,
+    FormGroup,
+    Label,
+    Input,
+    FormText
+} from 'reactstrap';
 import '../Register.css';
 
 const axios = require('axios');
@@ -14,14 +23,16 @@ class Register extends Component {
     handleSubmit(event) {
         event.preventDefault();
         console.log(this.state);
-        axios.post(url + '/users', {user:this.state})
-        .then(res => {
-            console.log(res);
-            if(res.data.success) {
-            }
-        }).catch(err => {
-            alert("Try Again!");
-        });
+        axios
+            .post(url + '/users', { user: this.state })
+            .then(res => {
+                console.log(res);
+                if (res.data.success) {
+                }
+            })
+            .catch(err => {
+                alert('Try Again!');
+            });
     }
 
     updateState(evt, field) {
@@ -47,14 +58,17 @@ class Register extends Component {
 
     render() {
         return (
-            <div className="Register">
-                <header className="Register-header">
-                    <h1 className="Register-title">Register</h1>
-                </header>
-                <div align="center" className="regForm">
-                    <form onSubmit={this.handleSubmit}>
-                        <label>
-                            <input
+            <div className="header">
+                <Container>
+                    <center>
+                        <h1>Register</h1>
+                    </center>
+                </Container>
+                <Container>
+                    <Form onSubmit={this.handleSubmit}>
+                        <FormGroup>
+                            <Label for="firstName">First Name</Label>
+                            <Input
                                 required
                                 placeholder="First Name"
                                 type="text"
@@ -63,10 +77,10 @@ class Register extends Component {
                                     this.updateState(evt, 'firstName')
                                 }
                             />
-                        </label>
-                        <br />
-                        <label>
-                            <input
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="lastName">Last Name</Label>
+                            <Input
                                 placeholder="Last Name"
                                 type="text"
                                 name="lastName"
@@ -74,10 +88,10 @@ class Register extends Component {
                                     this.updateState(evt, 'lastName')
                                 }
                             />
-                        </label>
-                        <br />
-                        <label>
-                            <input
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="username">Username</Label>
+                            <Input
                                 required
                                 placeholder="Username"
                                 type="text"
@@ -86,20 +100,20 @@ class Register extends Component {
                                     this.updateState(evt, 'username')
                                 }
                             />
-                        </label>
-                        <br />
-                        <label>
-                            <input
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="email">Email</Label>
+                            <Input
                                 required
                                 placeholder="Email"
                                 type="email"
                                 name="email"
                                 onChange={evt => this.updateState(evt, 'email')}
                             />
-                        </label>
-                        <br />
-                        <label>
-                            <input
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="password">Password</Label>
+                            <Input
                                 required
                                 placeholder="Password"
                                 type="password"
@@ -108,11 +122,10 @@ class Register extends Component {
                                     this.updateState(evt, 'password')
                                 }
                             />
-                        </label>
-                        <br />
-                        <input type="submit" value="Submit" />
-                    </form>
-                </div>
+                        </FormGroup>
+                        <Button>Submit</Button>
+                    </Form>
+                </Container>
             </div>
         );
     }

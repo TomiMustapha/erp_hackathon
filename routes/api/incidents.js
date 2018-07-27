@@ -31,7 +31,8 @@ router.post('/', (req, res) => {
         category: req.body.category,
         description: req.body.description,
         location: req.body.location,
-        date: req.body.date
+        date: req.body.date,
+        file: req.body.file
     });
 
     upcomingIncident

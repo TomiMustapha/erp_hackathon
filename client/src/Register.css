@@ -1,7 +1,16 @@
 label {
-	display: block;
+    display: block;
 }
 
 h1 {
-	text-align: center;
+    text-align: center;
+}
+
+.header {
+    margin: 3rem 5rem 5rem 5rem;
+}
+
+label {
+    font: Arial;
+    font-weight: bold;
 }

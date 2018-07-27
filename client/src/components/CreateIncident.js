@@ -23,7 +23,7 @@ class CreateIncident extends Component {
         event.preventDefault();
         console.log(this.state);
         axios
-            .post('/incidents', { user: this.state })
+            .post('/incidents', {})
             .then(res => {
                 console.log('Incident successfully created!');
             })
