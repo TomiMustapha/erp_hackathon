@@ -13,7 +13,7 @@ router.post('/login', function(req, res) {
             });
         } else {
             if (user) {
-                res.status(200).redirect('/');
+                res.redirect('/');
             } else {
                 res.status(404).json({
                     success: false

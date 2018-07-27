@@ -48,11 +48,6 @@ class AppNavbar extends Component {
                                 <NavLink href="/About">About</NavLink>
                             </NavItem>
                             <NavItem className="mr-5">
-                                <NavLink href="/Incidents">
-                                    Past Incidents
-                                </NavLink>
-                            </NavItem>
-                            <NavItem className="mr-5">
                                 <NavLink href="/Contact">Contact Us </NavLink>
                             </NavItem>
                         </Nav>
