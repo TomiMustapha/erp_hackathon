@@ -13,7 +13,6 @@ const incidents = require('./routes/api/incidents');
 const users = require('./routes/api/users');
 
 const app = express();
-
 const port = process.env.PORT || 8080;
 
 // middleware
@@ -32,6 +31,10 @@ app.use(function(req, res, next) {
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(methodOverride('_method'));
+
+// routes
+app.use('/users', users);
+app.use('/incidents', incidents);
 
 // db options
 var options = {
@@ -79,32 +82,17 @@ const storage = new MulterGridFsStorage({
 
 const incident = multer({ storage });
 
-app.all('/*', function(req, res, next) {
-    console.log(
-        'REQUEST: ' +
-            req.method +
-            ' ' +
-            req.path +
-            ' ' +
-            JSON.stringify(req.body)
-    );
-    next();
-});
-
-// Serve static assets if in production
-if (process.env.NODE_ENV === 'production') {
-    // Set static folder
-    app.use(express.static('client/build'));
-
-    app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-    });
-}
-
-// default route
-app.get('/', function(req, res) {
-    res.json('Hello World!');
-});
+// app.all('/*', function(req, res, next) {
+//     console.log(
+//         'REQUEST: ' +
+//             req.method +
+//             ' ' +
+//             req.path +
+//             ' ' +
+//             JSON.stringify(req.body)
+//     );
+//     next();
+// });
 
 // POST /incident
 app.post('/incident', incident.single('file'), (req, res) => {
@@ -156,8 +144,19 @@ app.delete('/incident/:file_id', (req, res) => {
     res.redirect('/');
 });
 
-// routes
-app.use('/users', users);
-app.use('/incidents', incidents);
+// Serve static assets if in production
+if (process.env.NODE_ENV === 'production') {
+    // Set static folder
+    app.use(express.static('client/build'));
+
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    });
+}
+
+// default route
+app.get('/', function(req, res) {
+    res.json('Hello World!');
+});
 
 app.listen(port, () => console.log(`Server running on port ${port}`));
