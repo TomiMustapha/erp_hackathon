@@ -14,14 +14,38 @@ class CreateIncident extends Component {
     handleSubmit(event) {
         event.preventDefault();
         console.log(this.state);
-        axios
-            .post('/incidents', {})
+        /*axios
+            .post('/incidents', )
             .then(res => {
                 console.log('Incident successfully created!');
             })
             .catch(err => {
                 alert('Try Again!');
-            });
+            });*/
+    }
+
+    updateState(evt, field) {
+        switch (field) {
+            case 'title':
+                this.setState({ title: evt.target.value });
+                break;
+            case 'category':
+                this.setState({ category: evt.target.value });
+                break;
+            case 'description':
+                this.setState({ description: evt.target.value });
+                break;
+            case 'date':
+                this.setState({ date: evt.target.value });
+                break;
+            case 'location':
+                this.setState({ location: evt.target.value });
+                break;
+            case 'file':
+                this.setState({ file: evt.target.value });
+                break;
+            default:
+        }
     }
 
     render() {
@@ -41,6 +65,9 @@ class CreateIncident extends Component {
                                 name="title"
                                 id="Title"
                                 placeholder="Incident Title"
+                                onChange={evt =>
+                                    this.updateState(evt, 'title')
+                                }
                             />
                         </FormGroup>
                         <FormGroup>
@@ -53,6 +80,9 @@ class CreateIncident extends Component {
                                 <option>Rhino out of Park</option>
                                 <option>Unidentified Person in Park</option>
                                 <option>Other</option>
+                                onChange={evt =>
+                                    this.updateState(evt, 'category')
+                                }
                             </Input>
                         </FormGroup>
                         <FormGroup>
@@ -64,6 +94,9 @@ class CreateIncident extends Component {
                                 name="description"
                                 id="Description"
                                 placeholder="Incident Description"
+                                onChange={evt =>
+                                    this.updateState(evt, 'description')
+                                }
                             />
                         </FormGroup>
                         <FormGroup>
@@ -73,15 +106,18 @@ class CreateIncident extends Component {
                                 name="date"
                                 id="Date"
                                 placeholder="date placeholder"
+                                onChange={evt =>
+                                    this.updateState(evt, 'date')
+                                }
                             />
                         </FormGroup>
                         <FormGroup>
                             <Label for="location">Location</Label>
-                            <Input type="text" name="location" id="Location" />
+                            <Input type="text" name="location" id="Location" onChange={evt =>this.updateState(evt, 'location')}/>
                         </FormGroup>
                         <FormGroup>
                             <Label for="File">Incident Image / Video</Label>
-                            <Input type="file" name="file" id="File" />
+                            <Input type="file" name="file" id="File" onChange={evt =>this.updateState(evt, 'file')}/>
                         </FormGroup>
                         <Button onClick={this.handleSubmit}>Submit</Button>
                     </Form>
