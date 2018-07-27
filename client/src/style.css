@@ -1,5 +1,7 @@
 label {
     display: block;
+    font: Arial;
+    font-weight: bold;
 }
 
 h1 {
@@ -8,9 +10,4 @@ h1 {
 
 .header {
     margin: 3rem 5rem 5rem 5rem;
-}
-
-label {
-    font: Arial;
-    font-weight: bold;
 }

@@ -1,14 +1,6 @@
 import React, { Component } from 'react';
-import {
-    Button,
-    Container,
-    Form,
-    FormGroup,
-    Label,
-    Input,
-    FormText
-} from 'reactstrap';
-import '../CreateIncident.css';
+import { Button, Container, Form, FormGroup, Label, Input } from 'reactstrap';
+import '../style.css';
 
 const axios = require('axios');
 
@@ -41,7 +33,7 @@ class CreateIncident extends Component {
                     </center>
                 </Container>
                 <Container>
-                    <Form onSubmit={this.handleSubmit}>
+                    <Form>
                         <FormGroup>
                             <Label for="title">Title</Label>
                             <Input
@@ -91,7 +83,7 @@ class CreateIncident extends Component {
                             <Label for="File">Incident Image / Video</Label>
                             <Input type="file" name="file" id="File" />
                         </FormGroup>
-                        <Button>Submit</Button>
+                        <Button onClick={this.handleSubmit}>Submit</Button>
                     </Form>
                 </Container>
             </div>

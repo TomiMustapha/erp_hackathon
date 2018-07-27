@@ -1,14 +1,6 @@
 import React, { Component } from 'react';
-import {
-    Button,
-    Container,
-    Form,
-    FormGroup,
-    Label,
-    Input,
-    FormText
-} from 'reactstrap';
-import '../Register.css';
+import { Button, Container, Form, FormGroup, Label, Input } from 'reactstrap';
+import '../style.css';
 
 const axios = require('axios');
 const url = 'http://localhost:8080';
@@ -65,7 +57,7 @@ class Register extends Component {
                     </center>
                 </Container>
                 <Container>
-                    <Form onSubmit={this.handleSubmit}>
+                    <Form>
                         <FormGroup>
                             <Label for="firstName">First Name</Label>
                             <Input
@@ -123,7 +115,7 @@ class Register extends Component {
                                 }
                             />
                         </FormGroup>
-                        <Button>Submit</Button>
+                        <Button onClick={this.handleSubmit}>Submit</Button>
                     </Form>
                 </Container>
             </div>
