@@ -91,6 +91,11 @@ app.all('/*', function(req, res, next) {
     next();
 });
 
+// Serve static assets if in production
+if (process.env.NODE_ENV === 'production') {
+    // Set static folder
+    app.use(express.static('client/build'));
+
 // default route
 app.get('/', function(req, res) {
     res.send('Hello World');
