@@ -47,6 +47,7 @@ class IncidentList extends Component {
                                 description,
                                 file,
                                 date,
+                                location,
                                 createdAt
                             }) => (
                                 <ListGroupItem fluid>
@@ -58,6 +59,7 @@ class IncidentList extends Component {
                                         description={description}
                                         file={file}
                                         date={date}
+                                        location={location}
                                     />
                                 </ListGroupItem>
                             )

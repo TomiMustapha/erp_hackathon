@@ -17,10 +17,12 @@ const axios = require('axios');
 class Incident extends Component {
     constructor(props) {
         super(props);
+        console.log(this.props.location);
     }
 
     render() {
         let url = '/incident/' + this.props.file;
+        console.log(this.props.location);
         return (
             <div width="500px">
                 <Card width="50%" className="mx-auto" fluid>
@@ -28,6 +30,10 @@ class Incident extends Component {
                         <CardTitle>{this.props.title}</CardTitle>
                         <CardSubtitle>
                             <Badge color="primary">{this.props.category}</Badge>
+                            <br/>
+                            <Badge color="secondary">{this.props.location}</Badge>
+                            <br/>
+                            <Badge color="info">{this.props.date}</Badge>
                         </CardSubtitle>
                         <CardText>{this.props.description}</CardText>
                         <img width="50%" src={url} alt="Card image cap" />

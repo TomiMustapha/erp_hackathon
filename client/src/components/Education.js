@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import {Alert, Container} from 'reactstrap'
-class About extends Component {
+class Education extends Component {
 
     render() {
         return (
             <div>
-            <h1>Contact Us</h1>
+            <h1>Education</h1>
             <Container>
             <Alert color="secondary">
             <h2>Books</h2>
                         <h3>Educational Books for Kids</h3>
-                        <br />
                         The Elephant’s Poo and the Magic It Can Do! by Fran Duthie
                         Have You Ever Seen An Elephant? by Fran Duthie
 <br />
@@ -24,8 +23,8 @@ class About extends Component {
 <br />
                         Eyewitness: Elephant by Ian Redmond
 <br />
+<br />
                         <h3>Educational Books for Adults</h3>
-                        <br />
                         The Elephant Whisperer by Lawrence Anthony & Graham Spence
 <br />
                         The Elephant Keeper by Christopher Nicholson
@@ -38,7 +37,7 @@ class About extends Component {
 <br />
                         Wildlife Wars: My Fight to Save Africa’s Natural Treasures by Richard Leakey
 <br />
-
+<br />
                         <h2>Articles / Scientific research</h2>
                         <b>Use these links as a quick reference for homework or general learning:</b>
                         <br />
@@ -120,4 +119,4 @@ class About extends Component {
         );
     }
 }
-export default About;
+export default Education;
