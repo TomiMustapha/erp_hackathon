@@ -17,8 +17,11 @@ class Login extends Component {
         axios
             .post('/users/login', { cred: this.state })
             .then(res => {
+                if (res.success === false) {
+                    alert('Invalid username or password!');
+                    // window.location = '/login';
+                }
                 window.location = '/';
-                console.log(res);
             })
             .catch(err => {
                 console.log(err);

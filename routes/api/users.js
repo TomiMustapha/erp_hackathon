@@ -13,7 +13,7 @@ router.post('/login', function(req, res) {
             });
         } else {
             if (user) {
-                res.redirect('/');
+                res.json(user);
             } else {
                 res.status(404).json({
                     success: false
@@ -55,7 +55,7 @@ router.post('/', function(req, res) {
                 success: false
             });
         } else {
-            res.redirect('/');
+            res.json({ success: true });
         }
     });
 });

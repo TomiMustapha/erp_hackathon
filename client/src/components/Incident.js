@@ -21,6 +21,9 @@ class Incident extends Component {
     }
 
     render() {
+        let share =
+            'https://evening-journey-64525.herokuapp.com/incidentPage/' +
+            this.props.id;
         let url = '/incident/' + this.props.file;
         console.log(this.props.location);
         return (
@@ -46,6 +49,35 @@ class Incident extends Component {
                         >
                             View More
                         </Button>
+                        <div className="mr-2">
+                            <a
+                                className="mr-2"
+                                href={`https://www.facebook.com/sharer/sharer.php?u=${share}`}
+                                target="_blank"
+                            >
+                                <img
+                                    src={`https://png.icons8.com/color/25/000000/facebook.png`}
+                                />
+                            </a>
+                            <a
+                                className="mr-2"
+                                href={`https://twitter.com/intent/tweet?url=${share}`}
+                                target="_blank"
+                            >
+                                <img
+                                    src={`https://png.icons8.com/color/25/000000/twitter.png`}
+                                />
+                            </a>
+                            <a
+                                className="mr-2"
+                                href={`https://plus.google.com/share?url=${share}`}
+                                target="_blank"
+                            >
+                                <img
+                                    src={`https://png.icons8.com/color/25/000000/google-plus.png`}
+                                />
+                            </a>
+                        </div>
                     </CardBody>
                 </Card>
             </div>

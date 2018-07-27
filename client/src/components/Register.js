@@ -17,10 +17,11 @@ class Register extends Component {
         axios
             .post('/users', { user: this.state })
             .then(res => {
-                window.location = '/';
-                console.log(res);
-                if (res.data.success) {
+                if (res.success === false) {
+                    alert('User already exists!');
+                    window.location = '/register';
                 }
+                window.location = '/';
             })
             .catch(err => {
                 console.log('Try again');
