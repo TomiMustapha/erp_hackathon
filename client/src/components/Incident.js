@@ -10,7 +10,7 @@ import {
     Badge,
     Container
 } from 'reactstrap';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 const axios = require('axios');
 
@@ -30,11 +30,16 @@ class Incident extends Component {
                             <Badge color="primary">{this.props.category}</Badge>
                         </CardSubtitle>
                         <CardText>{this.props.description}</CardText>
-                        <Img width="50%" src={url} alt="Card image cap" />
+                        <img width="50%" src={url} alt="Card image cap" />
                         <br />
                         <br />
 
-                        <Button href={`/IncidentPage/${this.props.id}`} color="secondary">View More</Button>
+                        <Button
+                            href={`/IncidentPage/${this.props.id}`}
+                            color="secondary"
+                        >
+                            View More
+                        </Button>
                     </CardBody>
                 </Card>
             </div>

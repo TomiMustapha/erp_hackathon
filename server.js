@@ -96,9 +96,9 @@ if (process.env.NODE_ENV === 'production') {
     // Set static folder
     app.use(express.static('client/build'));
 
-     app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-  });
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    });
 }
 // default route
 app.get('/', function(req, res) {
@@ -158,5 +158,5 @@ app.delete('/incident/:file_id', (req, res) => {
 // routes
 app.use('/users', users);
 app.use('/incidents', incidents);
-const port = process.env.PORT || 8080;
+
 app.listen(port, () => console.log(`Server running on port ${port}`));
