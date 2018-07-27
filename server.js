@@ -6,6 +6,7 @@ const crypto = require('crypto');
 const multer = require('multer');
 const MulterGridFsStorage = require('multer-gridfs-storage');
 const GridFsStream = require('gridfs-stream');
+const path = require('path');
 
 // routes/api
 const incidents = require('./routes/api/incidents');
@@ -52,6 +53,9 @@ connection.once('open', function() {
 const storage = new MulterGridFsStorage({
     url: process.env.mongoURI,
     file: (req, file) => {
+        if (file.contentType !== 'video/mp4') {
+            return null;
+        }
         return new Promise((resolve, reject) => {
             crypto.randomBytes(16, (err, buf) => {
                 if (err) {
@@ -93,15 +97,40 @@ app.post('/incident', incident.single('file'), (req, res) => {
     res.json({ file: req.file });
 });
 
-// GET /files/:filename
-app.get('/files/:filename', (req, res) => {
+// GET /files
+app.get('/files', (req, res) => {
+    gfs.files.find().toArray((err, files) => {
+        if (!files || files.length === 0) {
+            return res.status(404).json({ nofilesfound: 'No files found' });
+        }
+
+        return res.json(files);
+    });
+});
+
+// GET /incident/:filename
+app.get('/incident/:filename', (req, res) => {
     gfs.files.findOne({ filename: req.params.filename }, (error, file) => {
         if (!file || file.length === 0) {
             return res.status(404).json({ filenotfound: 'No file found' });
         }
 
-        return res.json(file);
+        const rs = gfs.createReadStream(file.filename);
+        rs.pipe(res);
     });
+});
+
+// DELETE /incident/:file_id
+app.delete('/incident/:file_id', (req, res) => {
+    gfs.remove(
+        (_id: req.params.file_id),
+        (root: 'incidents'),
+        (error, gridstore) => {
+            return res.status(400).json({ error: error });
+        }
+    );
+
+    res.redirect('/');
 });
 
 // routes
