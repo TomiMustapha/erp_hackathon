@@ -40,10 +40,13 @@ var options = {
     useNewUrlParser: true
 };
 
+const mongoURI =
+    'mongodb://admin:sum4mer8@ds153851.mlab.com:53851/erp_hackathon';
+
 // db connection
 mongoose
     .connect(
-        process.env.mongoURI,
+        mongoURI,
         options
     )
     .then(() => console.log('db connection successful.'))
@@ -59,7 +62,7 @@ connection.once('open', function() {
 });
 
 const storage = new MulterGridFsStorage({
-    url: process.env.mongoURI,
+    url: mongoURI,
     file: (req, file) => {
         console.log(file);
         return new Promise((resolve, reject) => {
@@ -159,6 +162,4 @@ app.get('/', function(req, res) {
 });
 
 const port = process.env.PORT || '8080';
-app.listen(port, '0.0.0.0', () =>
-    console.log(`Server running on port ${port}`)
-);
+app.listen(port, () => console.log(`Server running on port ${port}`));
