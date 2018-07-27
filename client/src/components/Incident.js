@@ -10,6 +10,7 @@ import {
     Badge,
     Container
 } from 'reactstrap';
+import {Link} from 'react-router-dom'
 
 const axios = require('axios');
 
@@ -47,7 +48,8 @@ class Incident extends Component {
                         />
                         <br />
                         <br />
-                        <Button color="secondary">Button</Button>
+                        
+                        <Button href={`/IncidentPage/${this.props.id}`} color="secondary">View More</Button>
                     </CardBody>
                 </Card>
             </div>

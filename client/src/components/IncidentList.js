@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { ListGroup, ListGroupItem, Container } from 'reactstrap';
 import Incident from './Incident';
-import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import { Alert } from 'reactstrap';
 
 const axios = require('axios');
 const url = 'http://localhost:8080';
 
 class IncidentList extends Component {
-    componentDidMount() {
+    componentWillMount() {
         this.getIncidents();
     }
     constructor(props) {
@@ -32,14 +32,7 @@ class IncidentList extends Component {
         return (
             <div>
                 <Container>
-                    <Breadcrumb>
-                        <BreadcrumbItem className="mx-auto">
-                            <p className="text-danger">
-                                In the Event Of An Emergency Contact Local
-                                Police First
-                            </p>
-                        </BreadcrumbItem>
-                    </Breadcrumb>
+                <Alert color="danger">In the Event of an Emergency Contact Local Police First</Alert>
                 </Container>
                 <center>
                     <h1>Recent Incidents</h1>
@@ -48,7 +41,7 @@ class IncidentList extends Component {
                     <ListGroup className="mx-auto">
                         {items.map(
                             ({
-                                id,
+                                _id,
                                 title,
                                 category,
                                 description,
@@ -58,7 +51,8 @@ class IncidentList extends Component {
                             }) => (
                                 <ListGroupItem fluid>
                                     <Incident
-                                        key={id}
+                                        key={_id}
+                                        id={_id}
                                         title={title}
                                         category={category}
                                         description={description}
