@@ -45,7 +45,10 @@ class IncidentPage extends Component {
                         <br></br>
                         <Badge color="primary">{item.category}</Badge>
                         <Alert  color="primary">
-                            {item.description}
+                            DESCRIPTION: <br></br> 
+                            {item.description} <br></br> 
+                            LOCATION: {item.location} <br></br> 
+                            DATE: {item.date}
                         </Alert>
                     </center>
                 </Container> 
